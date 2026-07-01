@@ -103,7 +103,7 @@ export default function CodingChallenge({ dayNumber, challenges, onComplete }: C
     setOutput(null);
     setTestResults(null);
     try {
-      const res = await fetch('/api/execute', {
+      const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code: getConsolidatedCode(), language: 'java', stdin: customInput })
@@ -129,7 +129,7 @@ export default function CodingChallenge({ dayNumber, challenges, onComplete }: C
     setTestResults(null);
     try {
       const consolidatedCode = getConsolidatedCode();
-      const res = await fetch('/api/execute/test', {
+      const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/execute/test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -151,7 +151,7 @@ export default function CodingChallenge({ dayNumber, challenges, onComplete }: C
   const askAI = async () => {
     setIsAskingAI(true);
     try {
-      const res = await fetch('/api/ai/hint', {
+      const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/ai/hint', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

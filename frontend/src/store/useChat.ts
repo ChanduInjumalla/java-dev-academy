@@ -101,7 +101,7 @@ export const useChat = create<ChatStore>((set, get) => ({
       const { usePageContext } = await import('./usePageContext');
       const pageContext = usePageContext.getState();
 
-      const response = await fetch('/api/chat', {
+      const response = await fetch((import.meta.env.VITE_API_URL || '') + '/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -194,7 +194,7 @@ export const useChat = create<ChatStore>((set, get) => ({
     const token = getToken();
     if (!token) return;
     try {
-      const res = await fetch('/api/chat/conversations', {
+      const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/chat/conversations', {
         headers: { 'Authorization': `Bearer ${token}` },
       });
       if (res.ok) {

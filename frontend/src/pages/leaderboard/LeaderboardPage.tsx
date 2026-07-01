@@ -18,7 +18,7 @@ export default function LeaderboardPage() {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const res = await fetch('/api/leaderboard');
+        const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/leaderboard');
         if (res.ok) {
           const data = await res.json();
           setUsers(data);

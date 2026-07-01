@@ -249,7 +249,7 @@ export const useProgress = create<ProgressState>()(
         const token = getToken();
         if (!token) return;
         try {
-          const res = await fetch('/api/progress', {
+          const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/progress', {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           if (res.ok) {

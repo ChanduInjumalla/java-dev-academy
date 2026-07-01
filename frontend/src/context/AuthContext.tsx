@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const initAuth = async () => {
       if (token) {
         try {
-          const res = await fetch('/api/auth/me', {
+          const res = await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/me', {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = async () => {
     try {
-      await fetch('/api/auth/logout', { 
+      await fetch((import.meta.env.VITE_API_URL || '') + '/api/auth/logout', { 
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });
