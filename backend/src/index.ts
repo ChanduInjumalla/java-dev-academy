@@ -28,7 +28,7 @@ const aiService = new AIService(new GeminiProvider());
 
 // Temporary Database Setup Route (since Render free tier blocks Shell)
 app.get('/api/setup-db', (req, res) => {
-  exec('npx prisma db push --accept-data-loss', (error, stdout, stderr) => {
+  exec('npx prisma db push --accept-data-loss && npx tsx create-admin.ts', (error, stdout, stderr) => {
     if (error) {
       return res.status(500).json({ error: error.message, stderr, stdout });
     }

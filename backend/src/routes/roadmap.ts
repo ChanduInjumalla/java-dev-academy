@@ -15,28 +15,43 @@ router.get('/day/:day', async (req, res) => {
 
     const dayStr = day.toString().padStart(2, '0');
 
+    const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/ChanduInjumalla/java-dev-academy/master';
+
     // 1. First load the markdown content (since we need it either way)
     const phaseNum = getPhaseForDay(day);
     const phaseStr = phaseNum.toString().padStart(2, '0');
-    const roadmapRoot = process.env.ROADMAP_ROOT || '/data/roadmap';
-    const mdPath = path.join(roadmapRoot, `Phase-${phaseStr}`, `Day-${dayStr}.md`);
-
+    
     let markdownContent = '';
     try {
-      const raw = await fs.readFile(mdPath, 'utf-8');
-      const { content } = matter(raw);
-      markdownContent = content;
+      if (process.env.NODE_ENV === 'production') {
+        const res = await fetch(`${GITHUB_RAW_BASE}/Phase-${phaseStr}/Day-${dayStr}.md`);
+        if (!res.ok) throw new Error('Not found');
+        const { content } = matter(await res.text());
+        markdownContent = content;
+      } else {
+        const roadmapRoot = process.env.ROADMAP_ROOT || path.join(__dirname, '..', '..', '..');
+        const mdPath = path.join(roadmapRoot, `Phase-${phaseStr}`, `Day-${dayStr}.md`);
+        const raw = await fs.readFile(mdPath, 'utf-8');
+        const { content } = matter(raw);
+        markdownContent = content;
+      }
     } catch {
       markdownContent = `# Day ${day}\n\nContent coming soon...`;
     }
 
     // 2. Try loading structured JSON
-    const jsonPath = path.join(__dirname, '..', 'data', 'days', `day-${dayStr}.json`);
     let dayData: any;
     
     try {
-      const jsonContent = await fs.readFile(jsonPath, 'utf-8');
-      dayData = JSON.parse(jsonContent);
+      if (process.env.NODE_ENV === 'production') {
+        const res = await fetch(`${GITHUB_RAW_BASE}/backend/src/data/days/day-${dayStr}.json`);
+        if (!res.ok) throw new Error('Not found');
+        dayData = await res.json();
+      } else {
+        const jsonPath = path.join(__dirname, '..', 'data', 'days', `day-${dayStr}.json`);
+        const jsonContent = await fs.readFile(jsonPath, 'utf-8');
+        dayData = JSON.parse(jsonContent);
+      }
       
       // Attach markdown content to the learn step
       if (dayData.steps) {
