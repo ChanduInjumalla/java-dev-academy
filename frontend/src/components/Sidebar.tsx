@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ChevronDown, ChevronRight, BookOpen, CheckCircle, Circle, LayoutDashboard, User, Settings, Trophy, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { ChevronDown, ChevronRight, BookOpen, CheckCircle, Circle, LayoutDashboard, User, Settings, Trophy, PanelLeftClose, PanelLeftOpen, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProgress } from '../store/useProgress';
+import { useAuth } from '../context/AuthContext';
 
 // Mock data representing the 22 phases and their days
 const phases = Array.from({ length: 22 }, (_, i) => ({
@@ -22,6 +23,7 @@ interface SidebarProps {
 
 export default function Sidebar({ isMobileOpen = false, setMobileOpen }: SidebarProps) {
   const { days: daysProgress } = useProgress();
+  const { user, logout } = useAuth();
   const [openPhases, setOpenPhases] = useState<number[]>([1]); // Phase 1 open by default
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -202,6 +204,24 @@ export default function Sidebar({ isMobileOpen = false, setMobileOpen }: Sidebar
             )}
           </div>
         ))}
+      </div>
+
+      {/* Logout Button at Bottom */}
+      <div className={`p-3 border-t border-border ${isCollapsed ? 'flex justify-center' : ''}`}>
+        {user && !isCollapsed && (
+          <div className="flex items-center gap-3 px-4 py-2 mb-2 text-sm text-gray-500">
+            <User size={16} className="shrink-0" />
+            <span className="truncate">{user.name || user.username}</span>
+          </div>
+        )}
+        <button
+          onClick={logout}
+          title="Logout"
+          className={`w-full flex items-center ${isCollapsed ? 'justify-center px-0 py-3' : 'gap-3 px-4 py-3'} rounded-lg text-sm font-semibold transition-colors text-red-500 hover:bg-red-500/10`}
+        >
+          <LogOut size={20} className="shrink-0" />
+          {!isCollapsed && <span>Logout</span>}
+        </button>
       </div>
     </div>
     </>

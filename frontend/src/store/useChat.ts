@@ -210,7 +210,7 @@ export const useChat = create<ChatStore>((set, get) => ({
     const token = getToken();
     if (!token) return;
     try {
-      const res = await fetch(`/api/chat/conversations/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/chat/conversations/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` },
       });
       if (res.ok) {
@@ -236,7 +236,7 @@ export const useChat = create<ChatStore>((set, get) => ({
     const token = getToken();
     if (!token) return;
     try {
-      await fetch(`/api/chat/conversations/${id}`, {
+      await fetch(`${import.meta.env.VITE_API_URL || ""}/api/chat/conversations/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
       });
@@ -253,7 +253,7 @@ export const useChat = create<ChatStore>((set, get) => ({
     const token = getToken();
     if (!token) return;
     try {
-      await fetch(`/api/chat/conversations/${id}/rename`, {
+      await fetch(`${import.meta.env.VITE_API_URL || ""}/api/chat/conversations/${id}/rename`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ title }),
@@ -270,7 +270,7 @@ export const useChat = create<ChatStore>((set, get) => ({
     const token = getToken();
     if (!token) return;
     try {
-      const res = await fetch(`/api/chat/conversations/${id}/favorite`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/chat/conversations/${id}/favorite`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` },
       });

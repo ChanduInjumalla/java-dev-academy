@@ -28,7 +28,7 @@ export default function CourseView() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/roadmap/day/${dayNumber}`)
+    fetch(`${import.meta.env.VITE_API_URL || ""}/api/roadmap/day/${dayNumber}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to load daily plan');
         return res.json();

@@ -46,7 +46,7 @@ const syncToBackend = async (day: number, data: any) => {
   const token = getToken();
   if (!token) return;
   try {
-    await fetch(`/api/progress/day/${day}`, {
+    await fetch(`${import.meta.env.VITE_API_URL || ""}/api/progress/day/${day}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

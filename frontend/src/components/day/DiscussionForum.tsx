@@ -20,7 +20,7 @@ export default function DiscussionForum({ dayNumber }: { dayNumber: number }) {
 
   const fetchComments = async () => {
     try {
-      const res = await fetch(`/api/comments/day/${dayNumber}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/comments/day/${dayNumber}`);
       if (res.ok) {
         const data = await res.json();
         setComments(data.comments);

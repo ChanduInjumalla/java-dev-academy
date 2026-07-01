@@ -41,7 +41,7 @@ export default function DayView() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetch(`/api/roadmap/day/${dayNumber}`)
+    fetch(`${import.meta.env.VITE_API_URL || ""}/api/roadmap/day/${dayNumber}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to load');
         return res.json();
