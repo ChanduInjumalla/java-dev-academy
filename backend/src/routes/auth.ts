@@ -142,7 +142,7 @@ router.post('/logout', authenticate, async (req: AuthRequest, res: Response): Pr
     }
     res.clearCookie('refreshToken');
     return res.json({ message: 'Logged out successfully' });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
@@ -158,7 +158,7 @@ router.get('/me', authenticate, async (req: AuthRequest, res: Response): Promise
     
     const { passwordHash, ...userData } = user;
     return res.json(userData);
-  } catch (error) {
+  } catch (error: any) {
     return res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
