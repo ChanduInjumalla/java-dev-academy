@@ -41,6 +41,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,md}'], // Cache all essential assets
+        maximumFileSizeToCacheInBytes: 5000000, // Increase limit to 5MB to handle Monaco editor bundle
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
