@@ -85,7 +85,8 @@ router.post('/register', authLimiter, async (req: Request, res: Response): Promi
     if (error instanceof z.ZodError) {
       return res.status(400).json({ error: (error as any).errors });
     }
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Register error:', error);
+    return res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 
@@ -129,7 +130,7 @@ router.post('/login', authLimiter, async (req: Request, res: Response): Promise<
 
     return res.json({ accessToken, user: { id: user.id, name: user.name, username: user.username, email: user.email, role: user.role } });
   } catch (error: any) {
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 
@@ -142,7 +143,7 @@ router.post('/logout', authenticate, async (req: AuthRequest, res: Response): Pr
     res.clearCookie('refreshToken');
     return res.json({ message: 'Logged out successfully' });
   } catch (error) {
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 
@@ -158,7 +159,7 @@ router.get('/me', authenticate, async (req: AuthRequest, res: Response): Promise
     const { passwordHash, ...userData } = user;
     return res.json(userData);
   } catch (error) {
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 
