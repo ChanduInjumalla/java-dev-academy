@@ -49,7 +49,7 @@ export default function PracticeBlock({ title, content }: PracticeBlockProps) {
         <h3 className="text-xl font-bold mb-4 text-green-500 flex items-center gap-2">
           💻 {title}
         </h3>
-        <div className="prose prose-invert max-w-none text-foreground/80">
+        <div className="prose prose-slate dark:prose-invert max-w-none text-foreground/80">
           <ReactMarkdown>{content}</ReactMarkdown>
         </div>
       </div>

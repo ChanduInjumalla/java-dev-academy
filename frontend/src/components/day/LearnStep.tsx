@@ -71,22 +71,18 @@ export default function LearnStep({ content, objectives, onContinue }: LearnStep
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        <div className="prose dark:prose-invert max-w-none text-foreground leading-relaxed
-          prose-headings:font-bold prose-headings:text-foreground 
+        <div className="prose prose-slate dark:prose-invert max-w-none leading-relaxed
+          prose-headings:font-bold 
           prose-h1:text-4xl prose-h1:mb-8 prose-h1:bg-clip-text prose-h1:text-transparent prose-h1:bg-gradient-to-r prose-h1:from-primary prose-h1:to-purple-500
           prose-h2:text-2xl prose-h2:border-b prose-h2:border-border/50 prose-h2:pb-4 prose-h2:mt-12 prose-h2:mb-6 prose-h2:font-extrabold
           prose-h3:text-xl prose-h3:text-primary prose-h3:mt-8 prose-h3:mb-4 prose-h3:bg-primary/5 prose-h3:p-3 prose-h3:rounded-lg prose-h3:border-l-4 prose-h3:border-primary
-          prose-p:text-gray-800 dark:prose-p:text-gray-300 prose-p:leading-8
-          prose-strong:text-foreground prose-strong:font-bold
-          prose-code:font-bold prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
           prose-pre:bg-[#09090b] prose-pre:text-white prose-pre:border prose-pre:border-border prose-pre:rounded-2xl prose-pre:shadow-lg prose-pre:p-6
           [&_pre_code]:text-white [&_pre_code]:bg-transparent [&_pre_code]:font-mono [&_pre_code]:font-normal
           prose-table:border-collapse prose-table:w-full prose-table:rounded-xl prose-table:overflow-hidden prose-table:shadow-sm prose-table:border prose-table:border-border/50
           prose-th:bg-background prose-th:text-primary prose-th:p-4 prose-th:text-left prose-th:border-b prose-th:border-border/50
           prose-td:p-4 prose-td:border-b prose-td:border-border/50 prose-tr:bg-card hover:prose-tr:bg-background/50
           prose-a:text-primary prose-a:no-underline hover:prose-a:underline hover:prose-a:text-primary/80
-          prose-ul:space-y-2 prose-li:text-gray-800 dark:prose-li:text-gray-300
-          prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-2xl prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-300 prose-blockquote:shadow-sm"
+          prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-2xl prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:italic prose-blockquote:shadow-sm"
         >
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
         </div>

@@ -84,7 +84,7 @@ export default function CourseView() {
               <h3 className="text-xl font-bold mb-6 text-primary border-b border-border pb-3">
                 {chunk.title}
               </h3>
-              <div className="prose prose-invert max-w-none text-foreground leading-relaxed">
+              <div className="prose prose-slate dark:prose-invert max-w-none text-foreground leading-relaxed">
                 <ReactMarkdown>{chunk.content}</ReactMarkdown>
               </div>
             </div>
