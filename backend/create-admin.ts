@@ -20,6 +20,9 @@ async function main() {
       name: "Super Admin",
       passwordHash,
       role: Role.SUPER_ADMIN,
+      profile: { create: {} },
+      settings: { create: {} },
+      learningProfile: { create: {} },
     }
   });
 
