@@ -1,7 +1,7 @@
 import { useAuth } from '../../context/AuthContext';
 import { useProgress } from '../../store/useProgress';
 import { Link } from 'react-router-dom';
-import { Flame, Trophy, Target, BookOpen, AlertTriangle, ArrowRight, Activity, Brain, Sparkles, ChevronRight } from 'lucide-react';
+import { Flame, Trophy, Target, BookOpen, AlertTriangle, ArrowRight, Activity, Brain, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 

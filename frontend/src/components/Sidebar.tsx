@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ChevronDown, ChevronRight, BookOpen, CheckCircle, Circle, LayoutDashboard, User, Settings, Trophy, PanelLeftClose, PanelLeftOpen, Award } from 'lucide-react';
+import { ChevronDown, ChevronRight, BookOpen, CheckCircle, Circle, LayoutDashboard, User, Settings, Trophy, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProgress } from '../store/useProgress';
 
