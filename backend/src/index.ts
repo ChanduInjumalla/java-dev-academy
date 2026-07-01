@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import { exec } from 'child_process';
 import { configureSecurity } from './config/security';
 import authRouter from './routes/auth';
 import roadmapRouter from './routes/roadmap';
@@ -24,6 +25,16 @@ const executionService = new CodeExecutionService(new Judge0Provider());
 const aiService = new AIService(new GeminiProvider());
 
 // --- Routes ---
+
+// Temporary Database Setup Route (since Render free tier blocks Shell)
+app.get('/api/setup-db', (req, res) => {
+  exec('npx prisma migrate deploy', (error, stdout, stderr) => {
+    if (error) {
+      return res.status(500).json({ error: error.message, stderr, stdout });
+    }
+    res.json({ message: 'Database migrated successfully!', stdout, stderr });
+  });
+});
 
 // Health check
 app.get('/api/health', (_req, res) => {
