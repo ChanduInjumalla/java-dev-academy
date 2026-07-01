@@ -1,0 +1,251 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  MENTOR
+  PREMIUM_USER
+  USER
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  username      String    @unique
+  passwordHash  String
+  name          String
+  role          Role      @default(USER)
+  
+  // Progress & Gamification
+  xp            Int       @default(0)
+  level         Int       @default(1)
+  currentStreak Int       @default(0)
+  highestStreak Int       @default(0)
+  
+  // Timestamps & Status
+  isEmailVerified Boolean   @default(false)
+  lastActiveAt    DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relationships
+  profile          Profile?
+  settings         UserSettings?
+  learningProfile  AILearningProfile?
+  
+  sessions         Session[]
+  auditLogs        AuditLog[]
+  progress         RoadmapProgress[]
+  codeSubmissions  CodeSubmission[]
+  aiInteractions   AIInteraction[]
+  aiMemory         AIMemory[]
+  notes            Note[]
+  bookmarks        Bookmark[]
+  studySessions    StudySession[]
+  revisionSchedules RevisionSchedule[]
+  comments         Comment[]
+  conversations    Conversation[]
+}
+
+model Profile {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  profilePhoto String?
+  bio          String?
+  location     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserSettings {
+  id                  String   @id @default(uuid())
+  userId              String   @unique
+  theme               String   @default("light")
+  fontSize            String   @default("medium")
+  codeFont            String   @default("Fira Code")
+  preferredLanguage   String   @default("java")
+  aiDifficulty        String   @default("adaptive") // beginner, adaptive, hard
+  dailyStudyGoalHours Int      @default(2)
+  timeZone            String   @default("UTC")
+  emailNotifications  Boolean  @default(true)
+  pushNotifications   Boolean  @default(false)
+  privacyLevel        String   @default("public")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userId       String
+  refreshToken String   @unique
+  device       String?
+  ipAddress    String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String   // e.g., "LOGIN_SUCCESS", "LOGIN_FAILED", "PASSWORD_RESET"
+  ipAddress String?
+  device    String?
+  details   String?  // JSON string for additional context
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model AILearningProfile {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  weakTopics   String[] // Array of topic IDs or tags
+  strongTopics String[]
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AIMemory {
+  id        String   @id @default(uuid())
+  userId    String
+  context   String   // General context of the memory
+  content   String   // "User struggled with Arrays today"
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RoadmapProgress {
+  id          String   @id @default(uuid())
+  userId      String
+  day         Int
+  phase       Int
+  isCompleted Boolean  @default(false)
+  theoryScore Int      @default(0)
+  codingScore Int      @default(0)
+  debugScore  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId, day])
+}
+
+model CodeSubmission {
+  id           String   @id @default(uuid())
+  userId       String
+  day          Int
+  questionId   String
+  code         String
+  isCorrect    Boolean
+  language     String   @default("java")
+  runtimeMs    Int?
+  memoryBytes  Int?
+  errorMessage String?
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RevisionSchedule {
+  id             String   @id @default(uuid())
+  userId         String
+  topic          String   // Concept or Day
+  nextRevisionAt DateTime
+  intervalDays   Int      // 1, 7, 30, etc.
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AIInteraction {
+  id         String   @id @default(uuid())
+  userId     String
+  context    String   // which day/question
+  prompt     String
+  response   String
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  content   String
+  tags      String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Bookmark {
+  id        String   @id @default(uuid())
+  userId    String
+  type      String   // e.g., 'question', 'topic', 'note'
+  reference String   // ID or path
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudySession {
+  id          String   @id @default(uuid())
+  userId      String
+  day         Int
+  durationMs  Int      // time spent in milliseconds
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  userId    String
+  day       Int
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Conversation {
+  id         String   @id @default(uuid())
+  userId     String
+  title      String   @default("New Chat")
+  mode       String   @default("learn")
+  isFavorite Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  messages ConversationMessage[]
+  user     User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ConversationMessage {
+  id             String   @id @default(uuid())
+  conversationId String
+  role           String   // 'user' | 'model'
+  content        String
+  createdAt      DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+}

@@ -1,0 +1,245 @@
+{
+  "day": 1,
+  "phase": 1,
+  "title": "Introduction to Java & Your First Program",
+  "difficulty": "beginner",
+  "estimatedTime": "6 hours",
+  "xpReward": 150,
+  "learningObjectives": [
+    "Understand what Java is and why it's popular",
+    "Know the difference between JDK, JRE, and JVM",
+    "Set up your development environment",
+    "Write, compile, and run your first Java program",
+    "Understand Java program structure and syntax"
+  ],
+  "steps": [
+    {
+      "type": "learn",
+      "title": "What is Java & How it Works",
+      "markdownFile": "Phase-01/Day-01.md",
+      "description": "Read through today's theory covering Java history, JDK/JRE/JVM architecture, and your first program."
+    },
+    {
+      "type": "theory-quiz",
+      "title": "Test Your Understanding",
+      "questions": [
+        {
+          "id": "d1-t1",
+          "question": "Who created Java and in which year?",
+          "expectedConcepts": ["James Gosling", "Sun Microsystems", "1995"],
+          "difficulty": "easy",
+          "xp": 10
+        },
+        {
+          "id": "d1-t2",
+          "question": "What does WORA stand for and what does it mean?",
+          "expectedConcepts": ["Write Once", "Run Anywhere", "platform independent", "bytecode", "JVM"],
+          "difficulty": "easy",
+          "xp": 10
+        },
+        {
+          "id": "d1-t3",
+          "question": "What is the difference between JDK, JRE, and JVM?",
+          "expectedConcepts": ["JDK contains JRE", "JRE contains JVM", "JDK has development tools", "compiler javac", "JRE has class libraries", "JVM executes bytecode"],
+          "difficulty": "medium",
+          "xp": 15
+        },
+        {
+          "id": "d1-t4",
+          "question": "What is bytecode? Why is it important?",
+          "expectedConcepts": ["intermediate representation", ".class file", "platform independent", "JVM can understand", "not machine code"],
+          "difficulty": "medium",
+          "xp": 15
+        },
+        {
+          "id": "d1-t5",
+          "question": "Why does Java need both a compiler AND an interpreter?",
+          "expectedConcepts": ["compiler converts to bytecode", "interpreter executes bytecode", "javac", "JVM", "JIT compiler", "platform independence"],
+          "difficulty": "medium",
+          "xp": 15
+        },
+        {
+          "id": "d1-t6",
+          "question": "What is the role of the Garbage Collector in JVM?",
+          "expectedConcepts": ["automatic memory management", "frees unused memory", "no manual deallocation", "prevents memory leaks"],
+          "difficulty": "easy",
+          "xp": 10
+        },
+        {
+          "id": "d1-t7",
+          "question": "Why must the filename match the public class name?",
+          "expectedConcepts": ["Java requirement", "public class", "compiler enforces", "one public class per file", "filename.java must match"],
+          "difficulty": "easy",
+          "xp": 10
+        },
+        {
+          "id": "d1-t8",
+          "question": "What is the purpose of the main method in Java?",
+          "expectedConcepts": ["entry point", "program execution starts", "JVM looks for main", "public static void main"],
+          "difficulty": "easy",
+          "xp": 10
+        },
+        {
+          "id": "d1-t9",
+          "question": "What does 'public static void main(String[] args)' mean — explain each keyword?",
+          "expectedConcepts": ["public = accessible anywhere", "static = no object needed", "void = returns nothing", "main = entry point", "String[] args = command line arguments"],
+          "difficulty": "hard",
+          "xp": 20
+        },
+        {
+          "id": "d1-t10",
+          "question": "What is the difference between print(), println(), and printf()?",
+          "expectedConcepts": ["print stays same line", "println adds new line", "printf formatted output", "format specifiers", "%s %d %f"],
+          "difficulty": "easy",
+          "xp": 10
+        }
+      ]
+    },
+    {
+      "type": "coding-challenge",
+      "title": "Write Java Code",
+      "challenges": [
+        {
+          "id": "d1-c1",
+          "title": "Print I Love Java",
+          "description": "Write a program to print \"I love Java\" 5 times (use 5 println statements).",
+          "starterCode": "public class Main {\n    public static void main(String[] args) {\n        // Print \"I love Java\" 5 times\n    }\n}",
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "I love Java\nI love Java\nI love Java\nI love Java\nI love Java",
+              "isHidden": false,
+              "description": "Should print 'I love Java' exactly 5 times"
+            }
+          ],
+          "hints": [
+            "Use System.out.println(\"I love Java\"); five times"
+          ],
+          "xp": 15
+        },
+        {
+          "id": "d1-c2",
+          "title": "Triangle Pattern",
+          "description": "Write a program to print a triangle pattern using * and println:\n```\n*\n**\n***\n****\n*****\n```",
+          "starterCode": "public class Main {\n    public static void main(String[] args) {\n        // Print a triangle of * characters\n    }\n}",
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "*\n**\n***\n****\n*****",
+              "isHidden": false,
+              "description": "Triangle pattern with 5 rows"
+            }
+          ],
+          "hints": [
+            "Use System.out.println(\"*\"); for the first line",
+            "Each subsequent line adds one more * character"
+          ],
+          "xp": 20
+        },
+        {
+          "id": "d1-c3",
+          "title": "Formatted Introduction",
+          "description": "Write a program that uses printf to display:\n```\nStudent: Chandu\nAge: 22 years\nGPA: 8.5\n```",
+          "starterCode": "public class Main {\n    public static void main(String[] args) {\n        String name = \"Chandu\";\n        int age = 22;\n        double gpa = 8.5;\n        // Use printf to print formatted output\n    }\n}",
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Student: Chandu\nAge: 22 years\nGPA: 8.5",
+              "isHidden": false,
+              "description": "Formatted output using printf"
+            }
+          ],
+          "hints": [
+            "Use System.out.printf(\"Student: %s%n\", name);",
+            "Use %d for integers and %.1f for doubles"
+          ],
+          "xp": 25
+        },
+        {
+          "id": "d1-c4",
+          "title": "Box Pattern",
+          "description": "Write a program that prints a 5x5 box made of * characters:\n```\n*****\n*   *\n*   *\n*   *\n*****\n```",
+          "starterCode": "public class Main {\n    public static void main(String[] args) {\n        // Print a 5x5 box of * characters\n    }\n}",
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "*****\n*   *\n*   *\n*   *\n*****",
+              "isHidden": false,
+              "description": "5x5 box pattern"
+            }
+          ],
+          "hints": [
+            "First and last rows are *****",
+            "Middle rows have * at start and end with spaces in between"
+          ],
+          "xp": 20
+        },
+        {
+          "id": "d1-c5",
+          "title": "Receipt Printer",
+          "description": "Write a program that prints a simple receipt with item names and prices using printf:\n```\n--- RECEIPT ---\nItem          Price\nApple         $1.50\nBread         $2.75\nMilk          $3.20\n--- TOTAL: $7.45 ---\n```",
+          "starterCode": "public class Main {\n    public static void main(String[] args) {\n        // Print a formatted receipt\n    }\n}",
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "--- RECEIPT ---\nItem          Price\nApple         $1.50\nBread         $2.75\nMilk          $3.20\n--- TOTAL: $7.45 ---",
+              "isHidden": false,
+              "description": "Formatted receipt output"
+            }
+          ],
+          "hints": [
+            "Use printf with %-14s for left-aligned strings",
+            "Use $%.2f for prices with 2 decimal places"
+          ],
+          "xp": 30
+        }
+      ]
+    },
+    {
+      "type": "debug-challenge",
+      "title": "Find & Fix the Bugs",
+      "exercises": [
+        {
+          "id": "d1-d1",
+          "title": "Missing Semicolon",
+          "buggyCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World\")\n    }\n}",
+          "hint": "Every statement in Java must end with a semicolon ;",
+          "expectedOutput": "Hello World",
+          "xp": 10
+        },
+        {
+          "id": "d1-d2",
+          "title": "Case Sensitivity — Method Name",
+          "buggyCode": "public class Main {\n    public static void Main(String[] args) {\n        System.out.println(\"Hello World\");\n    }\n}",
+          "hint": "Java is case-sensitive. The entry point method has a specific casing — main, not Main.",
+          "expectedOutput": "Hello World",
+          "xp": 10
+        },
+        {
+          "id": "d1-d3",
+          "title": "Case Sensitivity — println",
+          "buggyCode": "public class Main {\n    public static void main(String[] args) {\n        System.out.Println(\"Hello World\");\n    }\n}",
+          "hint": "Check the casing of println — Java is case-sensitive.",
+          "expectedOutput": "Hello World",
+          "xp": 10
+        },
+        {
+          "id": "d1-d4",
+          "title": "Missing Array Brackets",
+          "buggyCode": "public class Main {\n    public static void main(String args) {\n        System.out.println(\"Hello World\");\n    }\n}",
+          "hint": "The main method parameter should be an array of Strings: String[] args",
+          "expectedOutput": "Hello World",
+          "xp": 10
+        },
+        {
+          "id": "d1-d5",
+          "title": "Naming Convention",
+          "buggyCode": "public class main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World\");\n    }\n}",
+          "hint": "Class names in Java should start with an uppercase letter (PascalCase).",
+          "expectedOutput": "Hello World",
+          "xp": 10
+        }
+      ]
+    }
+  ]
+}
