@@ -40,7 +40,7 @@ export default function LearnStep({ content, objectives, onContinue }: LearnStep
             </div>
             <h3 className="text-lg font-bold text-foreground">Learning Objectives</h3>
           </div>
-          <p className="text-gray-400 text-sm mb-4">Check off each objective as you learn it:</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">Check off each objective as you learn it:</p>
           <div className="space-y-3">
             {objectives.map((obj, i) => (
               <button
@@ -76,7 +76,7 @@ export default function LearnStep({ content, objectives, onContinue }: LearnStep
           prose-h1:text-4xl prose-h1:mb-8 prose-h1:bg-clip-text prose-h1:text-transparent prose-h1:bg-gradient-to-r prose-h1:from-primary prose-h1:to-purple-500
           prose-h2:text-2xl prose-h2:border-b prose-h2:border-border/50 prose-h2:pb-4 prose-h2:mt-12 prose-h2:mb-6 prose-h2:font-extrabold
           prose-h3:text-xl prose-h3:text-primary prose-h3:mt-8 prose-h3:mb-4 prose-h3:bg-primary/5 prose-h3:p-3 prose-h3:rounded-lg prose-h3:border-l-4 prose-h3:border-primary
-          prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-8
+          prose-p:text-gray-800 dark:prose-p:text-gray-300 prose-p:leading-8
           prose-strong:text-foreground prose-strong:font-bold
           prose-code:font-bold prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
           prose-pre:bg-[#09090b] prose-pre:text-white prose-pre:border prose-pre:border-border prose-pre:rounded-2xl prose-pre:shadow-lg prose-pre:p-6
@@ -85,7 +85,7 @@ export default function LearnStep({ content, objectives, onContinue }: LearnStep
           prose-th:bg-background prose-th:text-primary prose-th:p-4 prose-th:text-left prose-th:border-b prose-th:border-border/50
           prose-td:p-4 prose-td:border-b prose-td:border-border/50 prose-tr:bg-card hover:prose-tr:bg-background/50
           prose-a:text-primary prose-a:no-underline hover:prose-a:underline hover:prose-a:text-primary/80
-          prose-ul:space-y-2 prose-li:text-gray-700 dark:prose-li:text-gray-300
+          prose-ul:space-y-2 prose-li:text-gray-800 dark:prose-li:text-gray-300
           prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-2xl prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:italic prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-300 prose-blockquote:shadow-sm"
         >
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>

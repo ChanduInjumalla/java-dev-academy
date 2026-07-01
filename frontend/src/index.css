@@ -44,3 +44,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+/* Light-mode text contrast fix: gray-400/500 are too faint on white */
+:root:not(.dark) .text-gray-400 {
+  color: #6b7280 !important; /* gray-500 equivalent */
+}
+:root:not(.dark) .text-gray-500 {
+  color: #4b5563 !important; /* gray-600 equivalent */
+}
